@@ -104,9 +104,7 @@ def read_data(filename):
         examples.append(row)
     return examples
 
-
-# main
-if __name__ == "__main__":
+def main():
     if len(sys.argv) != 3:
         print("Must provide training_file and output_file")
         sys.exit(1)
@@ -122,3 +120,7 @@ if __name__ == "__main__":
     with open(outfile, "w") as f:
         f.write(str(tree))
     print("Decision tree written to", outfile)
+
+# main
+if __name__ == "__main__":
+    main()
