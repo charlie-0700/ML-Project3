@@ -1,6 +1,7 @@
 from collections import Counter
 import math
 import sys
+import csv
 
 
 # Compute entropy of the dataset for the target attribute
@@ -87,7 +88,7 @@ def id3(examples, target_attr, attributes):
     return tree
 
 
-# functionn to read in data
+# function to read in data
 def read_data(filename):
     examples = []
     with open(filename, "r") as file:
@@ -104,18 +105,20 @@ def read_data(filename):
     return examples
 
 
-# main program
-
+# main
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 id3.py <training_file>")
+    if len(sys.argv) != 3:
+        print("Must provide training_file and output_file")
         sys.exit(1)
 
-    filename = sys.argv[1]
-    examples = read_data(filename)
+    infile = sys.argv[1]
+    outfile = sys.argv[2]
+    examples = read_data(infile)
 
     target_attr = "PlayTennis"
     attributes = ["Outlook", "Temperature", "Humidity", "Wind"]
 
     tree = id3(examples, target_attr, attributes)
-    print(tree)
+    with open(outfile, "w") as f:
+        f.write(str(tree))
+    print("Decision tree written to", outfile)
