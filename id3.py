@@ -124,10 +124,10 @@ if __name__ == "__main__":
     # Unpack both the examples and the headers list
     examples, headers = read_data(infile)
 
-    # Dynamically grab the last column as the target attribute
+    # Take the last column as the target attribute
     target_attr = headers[-1]
     
-    # Dynamically grab everything between the ID column (index 0) and target column as attributes
+    # Take everything except the first and last columns as the attributes to split on
     attributes = headers[1:-1]
 
     tree = id3(examples, target_attr, attributes)
