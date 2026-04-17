@@ -97,12 +97,19 @@ def read_data(filename):
     headers = lines[0].strip().split(",")
 
     for line in lines[1:]:
-        values = line.strip().split(",")
+        line = line.strip()
+        # Skip over any blank lines at the end of the file
+        if not line:
+            continue
+            
+        values = line.split(",")
         row = {}
         for i in range(len(headers)):
             row[headers[i]] = values[i]
         examples.append(row)
-    return examples
+        
+    # Return both the parsed examples and the headers for dynamic extraction
+    return examples, headers
 
 
 # main
@@ -113,10 +120,15 @@ if __name__ == "__main__":
 
     infile = sys.argv[1]
     outfile = sys.argv[2]
-    examples = read_data(infile)
+    
+    # Unpack both the examples and the headers list
+    examples, headers = read_data(infile)
 
-    target_attr = "PlayTennis"
-    attributes = ["Outlook", "Temperature", "Humidity", "Wind"]
+    # Dynamically grab the last column as the target attribute
+    target_attr = headers[-1]
+    
+    # Dynamically grab everything between the ID column (index 0) and target column as attributes
+    attributes = headers[1:-1]
 
     tree = id3(examples, target_attr, attributes)
     with open(outfile, "w") as f:
