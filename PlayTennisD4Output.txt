@@ -1,0 +1,1 @@
+{'Outlook': {'Rain': {'Humidity': {'Normal': {'Wind': {'Weak': 'Yes', 'Strong': 'No'}}, 'High': 'No'}}, 'Overcast': {'Temperature': {'Cool': 'Yes', 'Mild': 'Yes', 'Hot': {'Humidity': {'Normal': 'Yes', 'High': 'No'}}}}, 'Sunny': 'No'}}
